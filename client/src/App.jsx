@@ -55,18 +55,12 @@ function App() {
                 </main>
 
                 {/* Footer Section */}
-                <footer className="mt-16 text-center text-gray-500 pb-8 border-t border-gray-200/60 pt-8">
+                <footer className="mt-16 text-center text-gray-500 pb-8 border-t border-gray-200/60 pt-8 px-4">
                     <p className="font-medium text-sm">© {new Date().getFullYear()} AI-Powered Expense Tracker.</p>
-                    <p className="text-xs mt-1 text-gray-400">Created for hackers, by hackers.</p>
+                    <p className="text-sm mt-1 text-gray-400">Created by Ishan Sharma</p>
                     <div className="flex justify-center flex-wrap gap-6 mt-4">
-                        <a href="https://github.com/ishxnclicks" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-all font-medium flex items-center gap-1">
+                        <a href="https://github.com/ishxnsharma" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-all font-medium flex items-center gap-1">
                             GitHub
-                        </a>
-                        <a href="https://instagram.com/ishxnclicks" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 transition-all font-medium flex items-center gap-1">
-                            Instagram
-                        </a>
-                        <a href="mailto:sharmaishxn@gmail.com" className="text-gray-400 hover:text-indigo-600 transition-all font-medium flex items-center gap-1">
-                            Contact
                         </a>
                     </div>
                 </footer>
