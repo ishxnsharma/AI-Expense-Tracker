@@ -17,6 +17,17 @@ const ExpenseForm = ({ onExpenseAdded }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const handleReset = (e) => {
+        e?.preventDefault();
+        setFormData({
+            amount: '',
+            category: 'Food',
+            date: new Date().toISOString().split('T')[0],
+            description: ''
+        });
+        setError('');
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -99,13 +110,23 @@ const ExpenseForm = ({ onExpenseAdded }) => {
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3 bg-gray-50 border transition-colors duration-200"
                     />
                 </div>
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition-all duration-200 transform hover:-translate-y-0.5"
-                >
-                    {loading ? 'Adding...' : 'Add Expense'}
-                </button>
+                <div className="flex gap-3 pt-2">
+                    <button
+                        type="button"
+                        onClick={handleReset}
+                        disabled={loading}
+                        className="w-1/3 flex justify-center py-3 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-bold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition-all duration-200"
+                    >
+                        Reset Form
+                    </button>
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-2/3 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition-all duration-200 transform hover:-translate-y-0.5"
+                    >
+                        {loading ? 'Adding...' : 'Add Expense'}
+                    </button>
+                </div>
             </form>
         </div>
     );

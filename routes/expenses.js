@@ -55,4 +55,15 @@ router.get('/insights', async (req, res) => {
     }
 });
 
+// DELETE all expenses (for starting fresh)
+router.delete('/all', async (req, res) => {
+    try {
+        await db.query('DELETE FROM expenses');
+        res.json({ message: 'All expenses deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error deleting expenses' });
+    }
+});
+
 module.exports = router;
