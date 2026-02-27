@@ -14,3 +14,8 @@ CREATE TABLE IF NOT EXISTS expenses (
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Insert a default user for the MVP so the foreign key constraint doesn't fail
+INSERT INTO users (id, username, email) 
+VALUES (1, 'demo_user', 'demo@example.com') 
+ON CONFLICT DO NOTHING;
