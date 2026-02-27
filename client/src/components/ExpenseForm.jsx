@@ -58,73 +58,87 @@ const ExpenseForm = ({ onExpenseAdded }) => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6 transition-all duration-300 hover:shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Add Expense</h2>
-            {error && <div className="bg-red-50 text-red-700 p-3 rounded-md mb-4 border border-red-200">{error}</div>}
-            <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Amount (₹)</label>
+        <div className="glass-panel p-6 rounded-2xl mb-6 transition-all duration-300 hover:border-white/20 group animate-slide-up relative overflow-hidden">
+            {/* Subtle glow behind the card */}
+            <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-br from-white/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+
+            <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3 relative z-10">
+                <span className="w-1.5 h-6 bg-neon-indigo rounded-full shadow-[0_0_10px_rgba(99,102,241,0.8)] inline-block"></span> Add Expense
+            </h2>
+            {error && <div className="bg-red-500/10 text-red-400 p-3 rounded-xl mb-5 border border-red-500/20 font-medium text-sm relative z-10">{error}</div>}
+
+            <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+                <div className="relative group/input">
+                    <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-widest">Amount (₹)</label>
                     <input
                         type="number"
                         name="amount"
                         value={formData.amount}
                         onChange={handleChange}
                         step="0.01"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3 bg-gray-50 border transition-colors duration-200"
+                        className="block w-full rounded-xl glass-input p-3.5 pl-9 transition-shadow"
                         required
                         placeholder="0.00"
                     />
+                    <span className="absolute left-3.5 top-[32px] text-gray-400 font-medium pointer-events-none">₹</span>
                 </div>
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Category</label>
-                    <select
-                        name="category"
-                        value={formData.category}
-                        onChange={handleChange}
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3 bg-gray-50 border transition-colors duration-200"
-                    >
-                        {categories.map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
-                        ))}
-                    </select>
+                    <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-widest">Category</label>
+                    <div className="relative">
+                        <select
+                            name="category"
+                            value={formData.category}
+                            onChange={handleChange}
+                            className="block w-full rounded-xl glass-input p-3.5 appearance-none cursor-pointer"
+                        >
+                            {categories.map(cat => (
+                                <option key={cat} value={cat} className="bg-dark-card text-gray-200 py-2">{cat}</option>
+                            ))}
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
                 </div>
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Date</label>
+                    <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-widest">Date</label>
                     <input
                         type="date"
                         name="date"
                         value={formData.date}
                         onChange={handleChange}
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3 bg-gray-50 border transition-colors duration-200"
+                        className="block w-full rounded-xl glass-input p-3.5 cursor-pointer"
                         required
+                        style={{ colorScheme: 'dark' }}
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Description (Optional)</label>
+                    <label className="block text-[11px] font-bold text-gray-400 mb-1.5 uppercase tracking-widest">Description (Optional)</label>
                     <input
                         type="text"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
                         placeholder="What was this for?"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3 bg-gray-50 border transition-colors duration-200"
+                        className="block w-full rounded-xl glass-input p-3.5"
                     />
                 </div>
-                <div className="flex gap-3 pt-2">
+                <div className="flex gap-3 pt-4">
                     <button
                         type="button"
                         onClick={handleReset}
                         disabled={loading}
-                        className="w-1/3 flex justify-center py-3 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-bold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition-all duration-200"
+                        className="w-1/3 flex justify-center items-center py-3.5 px-4 border border-white/10 rounded-xl shadow-sm text-sm font-bold text-gray-300 bg-white/5 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-base focus:ring-gray-500 disabled:opacity-50 transition-all duration-200"
                     >
-                        Reset Form
+                        Reset
                     </button>
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-2/3 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition-all duration-200 transform hover:-translate-y-0.5"
+                        className="w-2/3 flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-[0_0_20px_rgba(99,102,241,0.25)] text-sm font-bold text-white bg-gradient-to-r from-neon-indigo to-neon-purple hover:from-indigo-500 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-base focus:ring-neon-indigo disabled:opacity-50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]"
                     >
                         {loading ? 'Adding...' : 'Add Expense'}
+                        {!loading && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>}
                     </button>
                 </div>
             </form>
