@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-let baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// In production Vercel builds, backend and frontend share the same domain
+let baseURL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
 
 // Foolproof check: if deployed to Vercel but the user forgot to add `/api` to the backend URL
 if (baseURL && !baseURL.endsWith('/api') && !baseURL.endsWith('/api/')) {

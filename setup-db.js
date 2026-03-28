@@ -5,11 +5,11 @@ require('dotenv').config();
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false } // Required for Render databases
+    ssl: { rejectUnauthorized: false } // Required for remote databases like Supabase/Render
 });
 
 async function setup() {
-    console.log('Connecting to remote Render database...');
+    console.log('Connecting to remote database (e.g., Supabase)...');
     try {
         const schemaSql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
 
